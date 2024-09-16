@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+:root {
+ 
+  --light-pink:rgba(240, 231, 242, 0.794);
+  --white:#FFFFFF;
+  --dark-pink:rgb(203, 177, 198);
+  --dark-blue:#0f1935;
+  --grayish-blue:#616a83;
+  --very-light-pink:rgb(115, 83, 122);
+
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+ 
+}
+
+
+h1,h2{
+  color: var(--dark-blue);
+  font-family: "Playfair Display", serif;
+
+}
+a{
+  text-decoration: none;
+  
+}
+fieldset,
+button,input {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
