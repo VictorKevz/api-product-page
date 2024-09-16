@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import logo from "../assets/images/logo.png";
 import Cart from "./Cart";
@@ -25,7 +25,7 @@ function Navbar({ quantity, product, onDelete,isCartClicked,onToggle }) {
         <div className="cart-profile-wrapper">
           <button type="button" className="cart-btn" onClick={onToggle}>
             {quantity > 0 && <span className="nav-qty-num">{quantity}</span>}
-            <ShoppingCartRoundedIcon fontSize="large" className="cart-icon" />
+            <ShoppingCartIcon fontSize="large" className="cart-icon" />
           </button>
           <button className="profile-wrapper">
             <AccountCircleIcon fontSize="large" className="profile-img" />{" "}
