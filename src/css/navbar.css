@@ -88,6 +88,7 @@
 }
 .menu-icon{
     scale: 2;
+    color: var(--dark-blue);
 }
 .mask{
     position: fixed;
