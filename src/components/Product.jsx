@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import ImageSlider from "./ImageSlider";
+import LightBox from "./LightBox";
 
 import "../css/product.css";
 
@@ -13,11 +15,12 @@ function Product({
   onIncrease,
   onDecrease,
   onToggle,
-  isCartClicked
+  isCartClicked,
 }) {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [index, setIndex] = useState(0);
+  const [lightBox, setLightBox] = useState(false);
+
   const old_price = product.price + 0.25 * product.price;
 
   const getProduct = async () => {
@@ -40,8 +43,11 @@ function Product({
     getProduct();
   }, []);
 
-  const updateCurrentIndex = (currentIndex) => {
-    setIndex(currentIndex);
+  const openLightBox = () => {
+    setLightBox(true);
+  };
+  const closeLightBox = () => {
+    setLightBox(false);
   };
 
   if (isLoading) {
@@ -53,35 +59,11 @@ function Product({
   return (
     <section className="product-wrapper">
       <div className="product-container">
-        <article className="image-container">
-          <div className="main-image-wrapper">
-            <img
-              src={product.images[index]}
-              alt={product.title}
-              className="main-img"
-            />
-          </div>
-          <div className="thumbnails-container">
-            {product.images.map((img, i) => {
-              let isActive = i === index;
-
-              return (
-                <button
-                  type="button"
-                  key={i}
-                  onClick={() => updateCurrentIndex(i)}
-                  className={`thumbnail-wrapper`}
-                >
-                  <img
-                    src={img}
-                    alt="Product thumbnail"
-                    className={`thumbnail-img ${isActive && "active"}`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </article>
+        <ImageSlider
+          product={product}
+          lightBox={lightBox}
+          openLightBox={openLightBox}
+        />
         <article className="text-container">
           <span className="caption">Stronger With You Intensely</span>
           <h1 className="product-title">{product.title}</h1>
@@ -115,11 +97,20 @@ function Product({
               className="add-to-cart-btn"
               onClick={onToggle}
             >
-              <ShoppingCartRoundedIcon fontSize="large" /> {`${isCartClicked ? "Hide Cart" : "Show Cart"}`}
+              <ShoppingCartRoundedIcon fontSize="large" />{" "}
+              {`${isCartClicked ? "Hide Cart" : "Show Cart"}`}
             </button>
           </div>
         </article>
       </div>
+      {lightBox && (
+        <LightBox
+          onClose={closeLightBox}
+          product={product}
+          lightBox={lightBox}
+          openLightBox={openLightBox}
+        />
+      )}
     </section>
   );
 }

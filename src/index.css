@@ -41,3 +41,131 @@ button,input {
   background: none;
   cursor: pointer;
 }
+@media (width <= 1065px) {
+  /* Product Component */
+  .product-container{
+    flex-direction: column;
+  }
+  .text-container{
+    margin-top: 5rem;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+  .price-container{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+}
+@media (width <= 800px) {
+  /* Navbar Component */
+  .nav-container{
+    border-bottom: none;
+    padding: 0;
+  }
+  .logo{
+    scale:0.65;
+  }
+.links-wrapper{
+  position: absolute;
+  top: 100%;
+  margin-top: 3rem;
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: column;
+  display: none;
+}
+.nav-link{
+  font-size: 3rem;
+  font-weight: 600;
+}
+.links-wrapper.open{
+  display: flex;
+}
+.mask.show{
+  display: block;
+}
+.toggle-menu{
+  display: flex;
+}
+.login{
+  display: none;
+}
+.nav-link:hover::before{
+ display: none;
+}
+}
+@media (width <= 620px) {
+  .lightbox-container{
+    display: none;
+  }
+  .navigation-btn{
+    display: flex;
+  }
+  .navigation-btn.hide{
+    display: flex;
+  }
+  .thumbnails-container{
+    display: none;
+  }
+  .main-img{
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    height: auto;
+  }
+  .navigation-btn.prev{
+    left: 2.5rem;
+}
+.navigation-btn.next{
+    right: 2.5rem;
+}
+.product-wrapper{
+  margin-top: 0;
+  padding: 0;
+}
+.text-container{
+  padding: 0 2.4rem;
+}
+.product-container{
+  padding: 0 0 5rem 0;
+}
+.product-btn-wrapper{
+  max-width: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+.qty-btn-wrapper{
+  width: 100%;
+  background-color: var(--very-light-pink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4rem;
+}
+.qty-btn{
+  border: none;
+  background-color: var(--white);
+}
+.qty-num{
+  border: none;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.add-to-cart-btn{
+  padding: 0;
+  width: 100%;
+}
+.cart-wrapper{
+  right: 0;
+  width: 100%;
+  min-width: none;
+  margin-top: 1.5rem;
+}
+.filled-cart-wrapper{
+  gap: 1.5rem;
+}
+}

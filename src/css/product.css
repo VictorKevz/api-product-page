@@ -4,54 +4,25 @@
     align-items: center;
     justify-content: center;
     margin-top: 8rem;
+    padding: 0 2.4rem;
+
 }
 .product-container{
-    max-width: 1110px;
+    max-width: 1115px;
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
     padding: 5rem 0;
 }
-.image-container{
-  display: flex;
-  align-items: center; 
-  gap: 5rem; 
-}
-.main-img{
-    border-radius: 1.5rem;
-    max-width: 40rem;
-    width: 100%;
-    height: auto;
-    background-color: var(--dark-pink);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-}
-.thumbnails-container{
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-}
-.active{
-    border: 2px solid var(--very-light-pink);
-}
-.thumbnail-img{
-    width: 10rem;
-    height: auto;
-    border-radius: 1.5rem;
-    background-color: var(--dark-pink);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
+
 .text-container{
     display: flex;
     flex-direction: column;
     max-width: 50rem;
+    flex-wrap: wrap;
 }
 .caption{
     text-transform: uppercase;
@@ -117,8 +88,9 @@
     justify-content: center;
     border: 1px solid var(--dark-blue);
     border-radius: 4rem;
-    padding: 1rem 4rem;
     font-size: 1.5rem;
+    height: 4rem;
+    width: 8rem;
 
 }
 .add-to-cart-btn{
@@ -129,5 +101,21 @@
     color: var(--white);
     font-weight: 700;
     font-size: 1.5rem;
+    height: 4rem;
+    width: 200px;
+
+}
+/* .......Active States..........  */
+.qty-btn:hover{
+    border-color: var(--very-light-pink);
+    background-color: var(--dark-pink);
+    transition: .3s ease-in;
+
+}
+.add-to-cart-btn:hover{
+    background-color: inherit;
+    border: 1px solid var(--dark-pink);
+    color: var(--dark-blue);
+    transition: .3s ease-in;
 
 }

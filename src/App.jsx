@@ -8,6 +8,8 @@ function App() {
   const [quantity, setQty] = useState(0);
   const [isCartClicked, setIsCartClicked] = useState(false);
 
+
+
   //Retrieve previous quantity from local storage
   useEffect(() => {
     const savedQty = JSON.parse(localStorage.getItem("cart"));
@@ -33,6 +35,7 @@ function App() {
   const toggleCart = () => {
     setIsCartClicked(!isCartClicked);
   };
+ 
   return (
     <main className={`outer-container `}>
       <div className="inner-container">
