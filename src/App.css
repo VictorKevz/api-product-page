@@ -30,7 +30,7 @@ button{
   cursor: pointer;
 
 }
-li {
+li,a {
   list-style-type: none;
   cursor: pointer;
   font-size: 1.6rem;

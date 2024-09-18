@@ -8,6 +8,7 @@ import logo from "../assets/images/logo.png";
 import Cart from "./Cart";
 
 import "../css/navbar.css";
+import { maskVariants } from "../variants";
 
 function Navbar({ quantity, product, onDelete, isCartClicked, onToggle }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,9 +19,16 @@ function Navbar({ quantity, product, onDelete, isCartClicked, onToggle }) {
 
   return (
     <header className="nav-wrapper">
-      <nav className="nav-container">
+      <nav className="nav-container" aria-label="Main Navigation">
         <div className="logo-wrapper">
-        <button type="button" onClick={toggleMenu} className="toggle-menu">
+          
+          <button 
+            type="button" 
+            onClick={toggleMenu} 
+            className="toggle-menu" 
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen} // Indicates if the menu is open or closed
+          >
             {menuOpen ? (
               <CloseIcon fontSize="large" className="menu-icon" />
             ) : (
@@ -28,29 +36,70 @@ function Navbar({ quantity, product, onDelete, isCartClicked, onToggle }) {
             )}
           </button>
           <img src={logo} alt="Company logo" className="logo" />
-         
         </div>
-        <ul className={`links-wrapper ${menuOpen && "open"}`}>
-          <li className="nav-link">Home</li>
-          <li className="nav-link">Product</li>
-          <li className="nav-link">About</li>
-          <li className="nav-link">Contact</li>
-        </ul>
+
+        <motion.ul 
+          className={`links-wrapper ${menuOpen && "open"}`}
+          variants={maskVariants}
+          initial="hidden"
+          animate="visible"
+          key={menuOpen}
+          exit="exit"
+          role="menu" //role to indicate it's a navigation menu
+        >
+          <li className="nav-link" role="menuitem">
+            <a href="#home">Home</a>
+          </li>
+          <li className="nav-link" role="menuitem">
+            <a href="#product">Product</a>
+          </li>
+          <li className="nav-link" role="menuitem">
+            <a href="#about">About</a>
+          </li>
+          <li className="nav-link" role="menuitem">
+            <a href="#contact">Contact</a>
+          </li>
+        </motion.ul>
+
         <div className="cart-profile-wrapper">
-          <button type="button" className="cart-btn" onClick={onToggle}>
+          {/* Accessible button for cart */}
+          <button 
+            type="button" 
+            className="cart-btn" 
+            onClick={onToggle} 
+            aria-label="View shopping cart" 
+            aria-haspopup="true" // Indicates that clicking will open the cart
+            aria-expanded={isCartClicked} // Reflects cart open/closed state
+          >
             {quantity > 0 && <span className="nav-qty-num">{quantity}</span>}
             <ShoppingCartIcon fontSize="large" className="cart-icon" />
           </button>
-          <button className="profile-wrapper">
+
+          {/* Profile/Login button */}
+          <button 
+            className="profile-wrapper" 
+            aria-label="View user profile or login"
+          >
             <AccountCircleIcon fontSize="large" className="profile-img" />{" "}
             <span className="login">Login</span>
           </button>
         </div>
+
+        
         {isCartClicked && (
           <Cart quantity={quantity} product={product} onDelete={onDelete} />
         )}
       </nav>
-      <div className={`mask ${menuOpen && "show"}`}></div>
+
+      <motion.div 
+        className={`mask ${menuOpen && "show"}`}
+        variants={maskVariants}
+        initial="hidden"
+        animate="visible"
+        key={menuOpen}
+        exit="exit"
+        aria-hidden={!menuOpen} 
+      ></motion.div>
     </header>
   );
 }

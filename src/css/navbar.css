@@ -95,12 +95,13 @@
     top: 0;
     min-height: 100vh;
     width: 100vw;
-    background-color: rgba(11, 11, 16, 0.216);
+    background-color: rgba(0, 0, 3, 0.399);
     z-index: 10;
     left: 0;
     box-shadow: 0 3rem 1rem rgba(3, 4, 13, 0.366);
     display: none;
     backdrop-filter: blur(.5rem);
+    transition: .25s ease-in;
 }
 /* .......Active States..........  */
 .nav-link:hover{

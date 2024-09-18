@@ -77,7 +77,7 @@ button,input {
   flex-direction: column;
   display: none;
 }
-.nav-link{
+.nav-link>a{
   font-size: 3rem;
   font-weight: 600;
 }
@@ -95,6 +95,10 @@ button,input {
 }
 .nav-link:hover::before{
  display: none;
+}
+.nav-link>a:hover{
+  color: var(--white);
+  
 }
 }
 @media (width <= 620px) {

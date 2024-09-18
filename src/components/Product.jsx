@@ -7,6 +7,7 @@ import ImageSlider from "./ImageSlider";
 import LightBox from "./LightBox";
 
 import "../css/product.css";
+import { entryTextVariants } from "../variants";
 
 function Product({
   product,
@@ -39,6 +40,7 @@ function Product({
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getProduct();
   }, []);
@@ -46,6 +48,7 @@ function Product({
   const openLightBox = () => {
     setLightBox(true);
   };
+
   const closeLightBox = () => {
     setLightBox(false);
   };
@@ -56,6 +59,7 @@ function Product({
   if (error) {
     return <p>Failed to fetch products {error}</p>;
   }
+
   return (
     <section className="product-wrapper">
       <div className="product-container">
@@ -63,46 +67,62 @@ function Product({
           product={product}
           lightBox={lightBox}
           openLightBox={openLightBox}
+          aria-describedby="product-images" // Describes the images section
         />
-        <article className="text-container">
-          <span className="caption">Stronger With You Intensely</span>
-          <h1 className="product-title">{product.title}</h1>
-          <p className="product-parag">{product.description}</p>
-          <div className="price-container">
-            <p className="price">
-              {`$${product.price}`} <span className="discount">25% OFF</span>
-            </p>
-            <p className="old-price">{`$${old_price.toFixed(2)}`}</p>
-          </div>
-          <div className="product-btn-wrapper">
-            <div className="qty-btn-wrapper">
+        <AnimatePresence mode="wait">
+          <motion.article
+            className="text-container"
+            variants={entryTextVariants}
+            initial="hidden"
+            animate="visible"
+            aria-live="polite" // Announces changes to screen readers
+          >
+            <span className="caption">Stronger With You Intensely</span>
+            <h1 className="product-title">{product.title}</h1>
+            <p className="product-parag">{product.description}</p>
+            <div className="price-container">
+              <p className="price">
+                {`$${product.price}`} <span className="discount">25% OFF</span>
+              </p>
+              <p className="old-price">{`$${old_price.toFixed(2)}`}</p>
+            </div>
+            <div className="product-btn-wrapper">
+              <div className="qty-btn-wrapper" role="group" aria-label="Quantity controls">
+                <button
+                  type="button"
+                  className="qty-btn remove"
+                  onClick={onDecrease}
+                  aria-label="Decrease quantity"
+                >
+                  <RemoveIcon fontSize="large" className="qty-icon" />
+                </button>
+                <span className="qty-num" aria-live="polite" aria-atomic="true">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  className="qty-btn add"
+                  onClick={onIncrease}
+                  aria-label="Increase quantity"
+                >
+                  <AddIcon fontSize="large" className="qty-icon" />
+                </button>
+              </div>
               <button
                 type="button"
-                className="qty-btn remove"
-                onClick={onDecrease}
+                className="add-to-cart-btn"
+                onClick={onToggle}
+                aria-label={isCartClicked ? "Hide Cart" : "Show Cart"}
               >
-                <RemoveIcon fontSize="large" className="qty-icon" />
-              </button>
-              <span className="qty-num">{quantity}</span>
-              <button
-                type="button"
-                className="qty-btn add"
-                onClick={onIncrease}
-              >
-                <AddIcon fontSize="large" className="qty-icon" />
+                <ShoppingCartRoundedIcon fontSize="large" />{" "}
+                {`${isCartClicked ? "Hide Cart" : "Show Cart"}`}
               </button>
             </div>
-            <button
-              type="button"
-              className="add-to-cart-btn"
-              onClick={onToggle}
-            >
-              <ShoppingCartRoundedIcon fontSize="large" />{" "}
-              {`${isCartClicked ? "Hide Cart" : "Show Cart"}`}
-            </button>
-          </div>
-        </article>
+          </motion.article>
+        </AnimatePresence>
       </div>
+
+      {/* Lightbox is opened with keyboard accessibility */}
       {lightBox && (
         <LightBox
           onClose={closeLightBox}
